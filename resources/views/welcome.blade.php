@@ -1,95 +1,65 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+@extends('layout.main')
+@section ('title')
+@endsection
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+@section ('body')
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+<div class="row">
+<div class="col-md-6">
+@if(count($errors)>0)
+@foreach($errors->all() as $error)                                          
+<li>{{ $error }}</li>
+@endforeach
+@endif
 
-            .full-height {
-                height: 100vh;
-            }
+@if( session()->has('message'))
+<div class="alert alert-danger">
+                                                                             
+{{session()->get('message')}}
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+</div>
+@endif
 
-            .position-ref {
-                position: relative;
-            }
+<h2>Register</h2>
+<form class="form-horizontal" method="post" action="{{route('signup')}}">
+  <div class="form-group">
+    <label for="exampleInputFName">First Name</label>
+    <input type="text" class="form-control" id="exampleInputFName1"  placeholder="First Name" name="first_name">
+    
+  </div>
+  <label for="exampleInputLName">Last Name</label>
+    <input type="text" class="form-control" id="exampleInputLName1"  placeholder="Last Name" name="last_name">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1"  placeholder="Enter email" name="email">
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Sign up</button>
+  {{csrf_field()}}
+</form>
+</div>
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+<div class="col-md-6">
+<h2>Login</h2>
 
-            .content {
-                text-align: center;
-            }
+<form class="form-horizontal" method="post" action="{{route('signin')}}">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1"  placeholder="Enter email" name="email">
+    
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+  </div>
+ 
+  <button type="submit" class="btn btn-primary">Sign in</button>
+  {{csrf_field()}}
+</form>
+</div>
 
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                   Welcome
-                </div>
-
-                <div class="links" >
-                    <a href="#">Home</a>
-                    <a href="ulogin.php">Login</a>
-                    <a href="uregister.php">Register</a>
-                    <a href="ucontact.php">Contact</a>
-                   
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
+</div>
+@endsection
