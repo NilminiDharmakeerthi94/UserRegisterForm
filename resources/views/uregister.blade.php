@@ -1,38 +1,66 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Register Page</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
-</head>
-<body>
-    <h1>Register Here</h1>
 
-<form action="/uregister" method="post">
+@extends('layout.main')
+@section ('title')
+@endsection
 
-                        {{ csrf_field()}}
-                            
-								<label for="">Username</label><br>
-								<input type="text" name="u_name" value=""><br>
-							
-								<label for="">Password</label><br>
-								<input type="text"  name="password" value=""><br>
-							
-								<label for="">email</label><br>
-								<input type="text"  name="email" value=""><br>
-							
-								<label for="">Mobile No</label><br>
-								<input type="text"  name="mobileno" value=""><br>
-							
+@section ('body')
+<div class="row">
+<div class="col-md-6">
+@if(count($errors)>0)
+@foreach($errors->all() as $error)                                          
+<li>{{ $error }}</li>
+@endforeach
+@endif
 
-							
-								<input type="submit" name="" value="submit">
-							
+@if( session()->has('message'))
+<div class="alert alert-danger">
+                                                                             
+{{session()->get('message')}}
 
+</div>
+@endif
 
+<h2>Register</h2>
+<form class="form-horizontal" method="post" action="{{route('signup')}}">
+  <div class="form-group">
+    <label for="exampleInputFName">First Name</label>
+    <input type="text" class="form-control" id="exampleInputFName1"  placeholder="First Name" name="first_name">
+    
+  </div>
+  <label for="exampleInputLName">Last Name</label>
+    <input type="text" class="form-control" id="exampleInputLName1"  placeholder="Last Name" name="last_name">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1"  placeholder="Enter email" name="email">
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+  </div>
+  
+  
+  <button type="submit" class="btn btn-primary">Sign up</button>
+  {{csrf_field()}}
 </form>
-</body>
-</html>
+</div>
+
+<div class="col-md-6">
+<h2>Login</h2>
+
+<form class="form-horizontal" method="post" action="{{route('signin')}}">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1"  placeholder="Enter email" name="email">
+    
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+  </div>
+ 
+  <button type="submit" class="btn btn-primary">Sign in</button>
+  {{csrf_field()}}
+</form>
+</div>
+
+</div>
+@endsection
+

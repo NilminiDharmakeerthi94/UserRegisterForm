@@ -24,7 +24,8 @@ class UserController extends Controller
         ]);
 User::create($request->all());
 
-return redirect()->back()->with('message','Registration success');
+//return redirect()->back()->with('message','Registration success');
+return redirect()->route('userHome');
 
     }
 
@@ -32,14 +33,19 @@ return redirect()->back()->with('message','Registration success');
               $data = $request->only('email','password');
 
      if(Auth::attempt($data)){
-        return redirect()->route('home');//home page
+        return redirect()->route('userHome');//home page
         
      }
      return redirect()->back()->with('message','Login failed');
 
     }
-    public function getHome(){
-        return view('home');
+    
+    public function mHome(){
+        return view('mainHome');
     }
+    public function ureg(){                          // user register
+        return view('uregister');
+    }
+       
     }
 

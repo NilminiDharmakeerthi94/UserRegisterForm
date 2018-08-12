@@ -14,11 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route ::get('users',['uses'=>'UserController@index']);
-Route ::get('home',['uses'=>'UserController@getHome',
-'as'=> 'home']);
 
-Route ::post('/register' , ['uses'=>'UserController@storedata',
+
+
+Route::get('uregister', ['uses'=>'UserController@ureg']);
+Route ::post('register', ['uses'=>'UserController@storedata',
 'as' => 'signup'
 ]);
 
